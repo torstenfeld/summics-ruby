@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'summics/version'
+require 'lib/summics/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "summics"
@@ -18,7 +18,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  # spec.add_dependency "httparty", "~> 0.13"
+  spec.add_dependency "faraday", "~> 0.9"
+
+  spec.add_development_dependency "minitest", "~> 5.7"
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", "~> 3.3"
+  spec.add_development_dependency "webmock", "~> 1.21"
+  spec.add_development_dependency "vcr", "~> 2.9"
 end
