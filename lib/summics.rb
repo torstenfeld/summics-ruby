@@ -83,7 +83,13 @@ module Summics
 
     public
     def topicsOverview(sources, date_from, date_to)
-      # TODO: create topicsOverview
+      authenticate
+      params = {
+          'sources[]' => sources,
+          'fromDate' => Date.strptime(date_from, '%Y-%m-%d').iso8601,
+          'toDate' => Date.strptime(date_to, '%Y-%m-%d').iso8601
+      }
+      request :topicsOverview, params
     end
 
     public
