@@ -85,21 +85,34 @@ module Summics
     def topicsOverview(sources, date_from, date_to)
       authenticate
       params = {
-          'sources[]' => sources,
-          'fromDate' => Date.strptime(date_from, '%Y-%m-%d').iso8601,
-          'toDate' => Date.strptime(date_to, '%Y-%m-%d').iso8601
+        'sources[]' => sources,
+        'fromDate' => Date.strptime(date_from, '%Y-%m-%d').iso8601,
+        'toDate' => Date.strptime(date_to, '%Y-%m-%d').iso8601
       }
       request :topicsOverview, params
     end
 
     public
     def texts(sources, date_from, date_to, topics=nil)
-      # TODO: create texts
+      authenticate
+      params = {
+        'sources[]' => sources,
+        'fromDate' => Date.strptime(date_from, '%Y-%m-%d').iso8601,
+        'toDate' => Date.strptime(date_to, '%Y-%m-%d').iso8601,
+        'topics[]' => topics || []
+      }
+      request :texts, params
     end
 
     public
     def dashboard(sources, date_from, date_to)
-      # TODO: dashboard
+      authenticate
+      params = {
+        'sources[]' => sources,
+        'fromDate' => Date.strptime(date_from, '%Y-%m-%d').iso8601,
+        'toDate' => Date.strptime(date_to, '%Y-%m-%d').iso8601
+      }
+      request :dashboard, params
     end
 
     public
