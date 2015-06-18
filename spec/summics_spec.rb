@@ -7,23 +7,49 @@ describe Summics do
   end
 end
 
-describe 'get projects' do
+describe 'Summics Methods' do
   let(:client) { Summics::Client.new('asdf', 'asdf') }
 
-  before do
-    VCR.insert_cassette 'projects', :record => :new_episodes
+  describe 'get projects' do
+    # let(:client) { Summics::Client.new('asdf', 'asdf') }
+
+    before do
+      VCR.insert_cassette 'projects', :record => :new_episodes
+    end
+
+    after do
+      VCR.eject_cassette
+    end
+
+    it 'must have a projects method' do
+      client.must_respond_to :projects
+    end
+
+    it 'must parse the projects api response from JSON to Hash' do
+      client.projects.must_be_instance_of Array
+    end
   end
 
-  after do
-    VCR.eject_cassette
+  # TODO: add test for topics
+  describe 'get topics' do
+    # let(:client) { Summics::Client.new('asdf', 'asdf') }
+
+    before do
+      VCR.insert_cassette 'projects', :record => :new_episodes
+    end
+
+    after do
+      VCR.eject_cassette
+    end
   end
 
-  it 'must have a projects method' do
-    client.must_respond_to :projects
-  end
 
-  it 'must parse the projects api response from JSON to Hash' do
-    client.projects.must_be_instance_of Array
-  end
-
+  # TODO: add test for topicsOverview
+  # TODO: add test for texts with topics
+  # TODO: add test for texts without topics
+  # TODO: add test for dashboard
+  # TODO: add test for addTexts
+  # TODO: add test for text with textid
+  # TODO: add test for text with source and postid
 end
+
