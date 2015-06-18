@@ -97,8 +97,12 @@ module Summics
     end
 
     public
-    def addTexts(source, texts):
-      # TODO: addTexts
+    def addTexts(sourceid, texts)
+      authenticate
+      request :addTexts, {'sourceId' => sourceid, 'texts' => texts}
+
+      # expected result
+      # {"imported"=>["5582caa50c4d76c4f65642a3", "5582caa50c4d76c4f65642a4"], "errors"=>[]}
     end
 
     public
@@ -120,7 +124,7 @@ module Summics
       @logger.debug("using method: #{endpoint[:method] || 'get'}")
 
       case endpoint[:method]
-        when 'put' then response_json = @conn.put(endpoint[:url], param_dict, headers)
+        when 'put' then response_json = @conn.put(endpoint[:url], JSON.dump(param_dict), headers)
         when 'post' then response_json = @conn.post(endpoint[:url], param_dict, headers)
         else response_json = @conn.get(endpoint[:url], param_dict, headers)
       end
