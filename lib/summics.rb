@@ -6,8 +6,7 @@ require_relative 'summics/version'
 
 module Summics
   class Client
-    # include HTTParty
-    # attr_reader :endpoints
+
 
     HOST = 'https://api.summics.com'
 
@@ -53,20 +52,9 @@ module Summics
       @client_secret = client_secret
       @token = nil
       @host = host || HOST
-      # @logger.info("clientid: #{@client_id.to_s}")
       @logger.info("using host: #{@host.to_s}")
       @conn = Faraday.new :url => @host, :ssl => {:verify => false}
       @logger.debug('initialize end')
-    end
-
-    public
-    def test
-      # res = @conn.get('http://www.test.com')
-      # puts res.status
-      # puts res.body
-      # request :authenticate
-      # projects
-      topics '546244ae8db3f581419f1a42'
     end
 
     public
