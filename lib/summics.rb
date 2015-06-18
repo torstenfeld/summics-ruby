@@ -29,10 +29,10 @@ module Summics
             :url => '/texts'
         },
         :textByTextId => {
-            :url => '/text/textId'
+            :url => '/text/%{textId}'
         },
         :textByPostId => {
-            :url => '/text/{source_id}/{post_id}'
+            :url => '/text/%{sourceId}/%{postId}'
         },
         :dashboard => {
             :url => '/dashboard'
@@ -106,14 +106,31 @@ module Summics
     end
 
     public
-    def text(textid=nil, source=nil, postid=nil)
-      # TODO: text
+    def text(options=nil)
+      authenticate
+
+      textid = options['textid'] || nil
+      source = options['source'] || nil
+      postid = options['postid'] || nil
+
+      if !textid.nil?
+        request :textByTextId, {}, {:textId => textid}
+      elsif !source.nil? && !postid.nil?
+        request :textByPostId, {}, {:sourceId => source, :postId => postid}
+      else
+        raise 'missing parameters'
+      end
     end
 
     private
-    def request(endpoint, param_dict={}, url_param_dict={})
+    def request(endpoint, param_dict={}, url_param_dict=nil)
       headers = {}
       endpoint = ENDPOINTS[endpoint]
+
+      @logger.debug("url_param_dict: #{url_param_dict}")
+
+      endpoint[:url] = endpoint[:url] % url_param_dict unless url_param_dict.nil?
+
       @logger.debug("endpoint_url: #{endpoint[:url]}")
 
       headers['Authorization'] = @token unless @token.nil?
