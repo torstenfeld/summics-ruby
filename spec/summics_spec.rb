@@ -12,6 +12,7 @@ describe 'Summics Methods' do
   let(:client) { Summics::Client.new('asdf', 'asdf') }
 
   describe 'get projects' do
+    let(:projects) { client.projects }
 
     before do
       VCR.insert_cassette 'projects', :record => :new_episodes
@@ -26,15 +27,15 @@ describe 'Summics Methods' do
     end
 
     it 'must parse the projects api response from JSON to Array' do
-      client.projects.must_be_instance_of Array
+      projects.must_be_instance_of Array
     end
 
     it 'must have at least one result' do
-      client.projects.wont_be_empty
+      projects.wont_be_empty
     end
 
     it 'must have one item with specific properties' do
-      first_item = client.projects[0]
+      first_item = projects[0]
       first_item.must_be_instance_of Hash
       first_item.must_include 'id'
       first_item.must_include 'name'
@@ -42,7 +43,7 @@ describe 'Summics Methods' do
     end
 
     describe 'sources' do
-      let(:first_item) { client.projects[0] }
+      let(:first_item) { projects[0] }
       it 'must have at least one item with specific properties' do
         first_item['sources'].must_be_instance_of Array
         source = first_item['sources'][0]
@@ -134,7 +135,39 @@ describe 'Summics Methods' do
     end
   end
 
-  # TODO: add test for text with textid
-  # TODO: add test for text with source and postid
+  describe 'get text' do
+    let(:client) { Summics::Client.new('asdf', 'asdf') }
+
+    it 'must have a text method' do
+      client.must_respond_to :text
+    end
+
+    # TODO: add test for text with textid
+    # context 'with textid' do
+      before do
+        VCR.insert_cassette 'text', :record => :new_episodes
+      end
+
+      after do
+        VCR.eject_cassette
+      end
+
+      let(:textid) {  }
+
+    # end
+
+    # TODO: add test for text with source and postid
+    # context 'with source and postid' do
+      let(:source) {  }
+      let(:postid) {  }
+    # end
+
+    # TODO: add test for text without parameters --> error
+    # context 'with missing parameters' do
+      it 'must raise an error' do
+
+      end
+    # end
+  end
 end
 
