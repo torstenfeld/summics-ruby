@@ -154,8 +154,8 @@ module Summics
       end
 
       @logger.debug("response status: #{response_json.status}")
+      @logger.debug(response_json.body.to_s)
       response = JSON.parse(response_json.body)
-      @logger.debug(response.to_s)
       response
     end
 
