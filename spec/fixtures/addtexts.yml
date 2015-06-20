@@ -1,0 +1,88 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.summics.com/auth
+    body:
+      encoding: US-ASCII
+      string: clientId=asdf&secret=asdf
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Sat, 20 Jun 2015 09:22:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '56'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+    body:
+      encoding: US-ASCII
+      string: '{"token":"asdf="}'
+    http_version:
+  recorded_at: Sat, 20 Jun 2015 09:22:17 GMT
+- request:
+    method: put
+    uri: https://api.summics.com/texts
+    body:
+      encoding: UTF-8
+      string: '{"sourceId":"asdf","texts":[{"text":"As in indoor
+        volleyball, the object of the game is to send the ball over the net and to
+        ground it on the opponent''s court, and to prevent the same effort by the
+        opponent. A team is allowed up to three touches to return the ball across
+        the net","postId":"61611","timestamp":"2015-06-20T11:22:15+02:00","user":"673","thisiscustom1":"morton@example.net","2ndcust":"Remote
+        Viewer"},{"text":"Volleyball Magazine staged the event the next year at the
+        same location, this time sponsored by Schlitz Light Beer. In 1978 Wilk formed
+        a sports promotion company named Event Concepts with Craig Masuoka and moved
+        the World Championship of Beach Volleyball to Redondo Beach. Jose Cuervo tequila
+        signed on as sponsor and the prize purse. The event was successful and Cuervo
+        funded an expansion the next year to three events. The California Pro Beach
+        Tour debuted with events in Laguna Beach, Santa Barbara and the World Championship
+        in Redondo.","postId":"125","timestamp":"2015-06-20T11:22:15+02:00","user":"4006","thisiscustom1":"aida@example.com","2ndcust":"Video
+        Viewer"}]}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Authorization:
+      - asdf=
+      Content-Type:
+      - application/json
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.4.6 (Ubuntu)
+      Date:
+      - Sat, 20 Jun 2015 09:22:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '80'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+    body:
+      encoding: US-ASCII
+      string: '{"imported":["558530cb0c4d76c4f6592edc","558530cb0c4d76c4f6592edd"],"errors":[]}'
+    http_version:
+  recorded_at: Sat, 20 Jun 2015 09:22:18 GMT
+recorded_with: VCR 2.9.3
